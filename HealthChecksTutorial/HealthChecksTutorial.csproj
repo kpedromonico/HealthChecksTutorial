@@ -7,6 +7,7 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0-preview.7.20365.15" />
       <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="3.1.6" />
+      <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="3.1.2" />
     </ItemGroup>
 
 </Project>
