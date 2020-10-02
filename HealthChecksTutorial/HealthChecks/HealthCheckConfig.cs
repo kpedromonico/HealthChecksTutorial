@@ -19,6 +19,13 @@ namespace HealthChecksTutorial.HealthChecks
                 ResponseWriter = ResponseWriter
             });
 
+            // Here I'm filtering only the database tags
+            applicationBuilder.UseHealthChecks("/dbhealth", new HealthCheckOptions
+            {
+                ResponseWriter = ResponseWriter,
+                Predicate = (x) => x.Tags.Contains("database") // Filter function
+            });
+
             return applicationBuilder;
         }
 

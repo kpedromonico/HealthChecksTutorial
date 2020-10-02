@@ -36,9 +36,18 @@ namespace HealthChecksTutorial
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // Don't forget to DI the health checks service
+            // Also, include the tags so you're able to filter!
             services.AddHealthChecks()
-                .AddDbContextCheck<DataContext>("Database Check")
-                .AddUrlGroup(new Uri("https://www.kpedroasdasdasdmonico.com"), name: "KaiosWebSite");              
+                .AddDbContextCheck<DataContext>("Database Check",
+                    tags: new string[] { "database" })
+                .AddUrlGroup(new Uri("https://www.kpedromonico.com"),
+                    name: "KaiosWebSite",
+                    tags: new List<string> { "http" })
+                // Our new custom FileHealthCheck
+                .AddCheck("fileHealthCheck",
+                    //  Here is the class instance, passing to the constructor
+                    instance: new FileHealthCheck(@"/Users/kpedromonico/Documents/i_exist.txt"),
+                    tags: new string[] { "file" });              
 
         }
 
@@ -65,3 +74,5 @@ namespace HealthChecksTutorial
         }
     }
 }
+
+
